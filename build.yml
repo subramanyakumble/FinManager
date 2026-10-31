@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: unzip -q FinManager.zip
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -16,7 +17,8 @@ jobs:
         with:
           gradle-version: 8.9
       - run: gradle assembleDebug --no-daemon
+        working-directory: FinManager
       - uses: actions/upload-artifact@v4
         with:
           name: FinManager-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: FinManager/app/build/outputs/apk/debug/app-debug.apk
